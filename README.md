@@ -34,6 +34,30 @@
     }
     ```
 
+## 信息登入
+
+### 学院信息登入
+
+- 路径 `/imformation/college`
+- 参数
+    - collegeName `String`
+    - specialtyName `String`
+    - className `String`
+
+调用例子
+
+- 发送参数
+
+    ```json
+    {
+        "collegeName": "12345",
+        "specialtyName": "软件工程",
+        "className": "1班"
+    }
+    ```
+
+- 说明： 若 `specialtyName` 和 `className` 为空则代表只创建学院，若 `className` 为空则代表只创建专业。
+
 ## 其他操作
 
 - 必选参数
