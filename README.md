@@ -38,11 +38,13 @@
 
 ### 学院信息登入
 
-- 路径 `/imformation/college`
+- 路径 `/write/college`
 - 参数
-    - collegeName `String`
-    - specialtyName `String`
-    - className `String`
+    - college `String`
+    - specialty `String`
+    - grade `String`
+    - class `String`
+- 需要对数据是否重复进行判断
 
 调用例子
 
@@ -50,13 +52,57 @@
 
     ```json
     {
-        "collegeName": "12345",
-        "specialtyName": "软件工程",
-        "className": "1班"
+        "college": "计算机科学与网络工程学院",
+        "specialty": "软件工程",
+        "grade": "17级",
+        "class": "1班"
     }
     ```
 
-- 说明： 若 `specialtyName` 和 `className` 为空则代表只创建学院，若 `className` 为空则代表只创建专业。
+- 说明：若 `specialtyName` 和 `className` 为空则代表只创建学院，若 `className` 为空则代表只创建专业。
+
+## 信息获取
+
+### 学院信息获取
+
+- 路径 `/read/college`
+- 返回数据
+    - college `String`
+    - specialty `String`
+    - grade `String`
+    - class `String`
+    - sum `String`
+
+调用例子
+
+- 响应
+
+    ```json
+    [
+        {
+            "college": "计算机科学与网络工程学院",
+            "specialty": "软件工程",
+            "grade": "17级",
+            "class": "1班",
+            "sum": "41"
+        },
+        {
+            "college": "计算机科学与网络工程学院",
+            "specialty": "软件工程",
+            "grade": "18级",
+            "class": "4班",
+            "sum": "40"
+        },
+        {
+            "college": "人文学院",
+            "specialty": "汉语言文学",
+            "grade": "15级",
+            "class": "2班",
+            "sum": "41"
+        }
+        .....
+    ]
+    ```
 
 ## 其他操作
 
