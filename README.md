@@ -16,16 +16,23 @@
 
 调用例子
 
-```json
-{  // 参数
-    "user": "17063000xx",
-    "pass": "dangoyears",
-    "type": "admin"
-}
-{  // 响应
-    "token": "07c08e27826abde6eacef0ffbc9686a030647c33"
-}
-```
+- 请求参数
+
+    ```json
+    {
+        "user": "17063000xx",
+        "pass": "dangoyears",
+        "type": "admin"
+    }
+    ```
+
+- 响应
+
+    ```json
+    {
+        "token": "07c08e27826abde6eacef0ffbc9686a030647c33"
+    }
+    ```
 
 ## 其他操作
 
