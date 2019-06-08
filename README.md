@@ -32,7 +32,7 @@
     ```json
     {
         "statusCode": 0,
-        "statusText": "成功。"
+        "statusText": "成功。",
         "token": "07c08e27826abde6eacef0ffbc9686a030647c33",
     }
     ```
