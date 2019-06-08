@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 11g                           */
-/* Created on:     2019/6/8 16:11:03                            */
+/* Created on:     2019/6/8 16:48:11                            */
 /*==============================================================*/
 
 
@@ -26,13 +26,13 @@ alter table "Student"
    drop constraint FK_STUDENT_HUMANINHE_HUMAN;
 
 alter table "Student"
-   drop constraint FK_STUDENT_STUDENTBE_ACADEMY;
-
-alter table "Student"
    drop constraint FK_STUDENT_STUDENTBE_CLASS;
 
 alter table "Student"
-   drop constraint FK_STUDENT_STUDENTHA_PROFESSI;
+   drop constraint FK_STUDENT_STUDENTBE_COLLEGE;
+
+alter table "Student"
+   drop constraint FK_STUDENT_STUDENTHA_SPECIALT;
 
 alter table "StudentAttendCourse"
    drop constraint FK_STUDENTA_STUDENTAT_COURSE;
@@ -44,10 +44,10 @@ alter table "Teacher"
    drop constraint FK_TEACHER_HUMANINHE_HUMAN;
 
 alter table "Teacher"
-   drop constraint FK_TEACHER_TEACHERBE_ACADEMY;
+   drop constraint FK_TEACHER_TEACHERBE_COLLEGE;
 
 alter table "Teacher"
-   drop constraint FK_TEACHER_TEACHERHA_PROFESSI;
+   drop constraint FK_TEACHER_TEACHERHA_SPECIALT;
 
 alter table "TeacherTeachsCourse"
    drop constraint FK_TEACHERT_TEACHERTE_TEACHER;
@@ -57,13 +57,13 @@ alter table "TeacherTeachsCourse"
 
 drop table "AcademicYear" cascade constraints;
 
-drop table "Academy" cascade constraints;
-
 drop index "TeacherMangeClass_FK";
 
 drop table "Class" cascade constraints;
 
 drop table "ClassRoom" cascade constraints;
+
+drop table "College" cascade constraints;
 
 drop index "CourseOpensAtSemester_FK";
 
@@ -79,11 +79,11 @@ drop table "CourseProgram" cascade constraints;
 
 drop table "Human" cascade constraints;
 
-drop table "Professional" cascade constraints;
-
 drop index "AcademicYearHasSemestes_FK";
 
 drop table "Semester" cascade constraints;
+
+drop table "Specialty" cascade constraints;
 
 drop index "StudentBelongsToClass_FK";
 
@@ -121,16 +121,6 @@ create table "AcademicYear"
 );
 
 /*==============================================================*/
-/* Table: "Academy"                                             */
-/*==============================================================*/
-create table "Academy" 
-(
-   "AcademyID"          INTEGER              not null,
-   "AcademyName"        VARCHAR2(32),
-   constraint PK_ACADEMY primary key ("AcademyID")
-);
-
-/*==============================================================*/
 /* Table: "Class"                                               */
 /*==============================================================*/
 create table "Class" 
@@ -157,6 +147,16 @@ create table "ClassRoom"
    "Capacity"           INTEGER,
    constraint PK_CLASSROOM primary key ("ClassroomID"),
    constraint AK_LOCATION_CLASSROO unique ("Location")
+);
+
+/*==============================================================*/
+/* Table: "College"                                             */
+/*==============================================================*/
+create table "College" 
+(
+   "CollegeID"          INTEGER              not null,
+   "CollegeName"        VARCHAR2(32),
+   constraint PK_COLLEGE primary key ("CollegeID")
 );
 
 /*==============================================================*/
@@ -238,16 +238,6 @@ create table "Human"
 );
 
 /*==============================================================*/
-/* Table: "Professional"                                        */
-/*==============================================================*/
-create table "Professional" 
-(
-   "ProfessionalID"     INTEGER              not null,
-   "ProfessioncalName"  VARCHAR2(32),
-   constraint PK_PROFESSIONAL primary key ("ProfessionalID")
-);
-
-/*==============================================================*/
 /* Table: "Semester"                                            */
 /*==============================================================*/
 create table "Semester" 
@@ -270,14 +260,24 @@ create index "AcademicYearHasSemestes_FK" on "Semester" (
 );
 
 /*==============================================================*/
+/* Table: "Specialty"                                           */
+/*==============================================================*/
+create table "Specialty" 
+(
+   "SpecialtyID"        INTEGER              not null,
+   "SpecialtyName"      VARCHAR2(32),
+   constraint PK_SPECIALTY primary key ("SpecialtyID")
+);
+
+/*==============================================================*/
 /* Table: "Student"                                             */
 /*==============================================================*/
 create table "Student" 
 (
    "HumanID"            INTEGER              not null,
    "ClassID"            INTEGER              not null,
-   "AcademyID"          INTEGER              not null,
-   "ProfessionalID"     INTEGER              not null,
+   "CollegeID"          INTEGER              not null,
+   "SpecialtyID"        INTEGER              not null,
    "StudentNumber"      INTEGER              not null,
    constraint PK_STUDENT primary key ("HumanID"),
    constraint AK_STUDENTNUMBER_STUDENT unique ("StudentNumber")
@@ -287,14 +287,14 @@ create table "Student"
 /* Index: "StudentBelongsToCollege_FK"                          */
 /*==============================================================*/
 create index "StudentBelongsToCollege_FK" on "Student" (
-   "AcademyID" ASC
+   "CollegeID" ASC
 );
 
 /*==============================================================*/
 /* Index: "StudentHasProfessional_FK"                           */
 /*==============================================================*/
 create index "StudentHasProfessional_FK" on "Student" (
-   "ProfessionalID" ASC
+   "SpecialtyID" ASC
 );
 
 /*==============================================================*/
@@ -335,8 +335,8 @@ create index "StudentAttendCourse2_FK" on "StudentAttendCourse" (
 create table "Teacher" 
 (
    "HumanID"            INTEGER              not null,
-   "ProfessionalID"     INTEGER,
-   "AcademyID"          INTEGER              not null,
+   "SpecialtyID"        INTEGER,
+   "CollegeID"          INTEGER              not null,
    "TeacherNumber"      INTEGER              not null,
    constraint PK_TEACHER primary key ("HumanID"),
    constraint AK_TEACHERNUMBER_TEACHER unique ("TeacherNumber")
@@ -346,14 +346,14 @@ create table "Teacher"
 /* Index: "TeacherBelongsToAcademy_FK"                          */
 /*==============================================================*/
 create index "TeacherBelongsToAcademy_FK" on "Teacher" (
-   "AcademyID" ASC
+   "CollegeID" ASC
 );
 
 /*==============================================================*/
 /* Index: "TeacherHasProfessional_FK"                           */
 /*==============================================================*/
 create index "TeacherHasProfessional_FK" on "Teacher" (
-   "ProfessionalID" ASC
+   "SpecialtyID" ASC
 );
 
 /*==============================================================*/
@@ -409,16 +409,16 @@ alter table "Student"
       references "Human" ("HumanID");
 
 alter table "Student"
-   add constraint FK_STUDENT_STUDENTBE_ACADEMY foreign key ("AcademyID")
-      references "Academy" ("AcademyID");
-
-alter table "Student"
    add constraint FK_STUDENT_STUDENTBE_CLASS foreign key ("ClassID")
       references "Class" ("ClassID");
 
 alter table "Student"
-   add constraint FK_STUDENT_STUDENTHA_PROFESSI foreign key ("ProfessionalID")
-      references "Professional" ("ProfessionalID");
+   add constraint FK_STUDENT_STUDENTBE_COLLEGE foreign key ("CollegeID")
+      references "College" ("CollegeID");
+
+alter table "Student"
+   add constraint FK_STUDENT_STUDENTHA_SPECIALT foreign key ("SpecialtyID")
+      references "Specialty" ("SpecialtyID");
 
 alter table "StudentAttendCourse"
    add constraint FK_STUDENTA_STUDENTAT_COURSE foreign key ("CourseID")
@@ -433,12 +433,12 @@ alter table "Teacher"
       references "Human" ("HumanID");
 
 alter table "Teacher"
-   add constraint FK_TEACHER_TEACHERBE_ACADEMY foreign key ("AcademyID")
-      references "Academy" ("AcademyID");
+   add constraint FK_TEACHER_TEACHERBE_COLLEGE foreign key ("CollegeID")
+      references "College" ("CollegeID");
 
 alter table "Teacher"
-   add constraint FK_TEACHER_TEACHERHA_PROFESSI foreign key ("ProfessionalID")
-      references "Professional" ("ProfessionalID");
+   add constraint FK_TEACHER_TEACHERHA_SPECIALT foreign key ("SpecialtyID")
+      references "Specialty" ("SpecialtyID");
 
 alter table "TeacherTeachsCourse"
    add constraint FK_TEACHERT_TEACHERTE_TEACHER foreign key ("TeacherNumber")
