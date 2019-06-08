@@ -3,6 +3,7 @@
 ## 基本信息
 
 - 后端地址 `https://dbcd.qfstudio.net`
+- ~~服务器端的响应均包含statusCode `Number`和statusText `String`字段。~~（正在调试）
 
 ## 用户登陆
 
@@ -30,7 +31,9 @@
 
     ```json
     {
-        "token": "07c08e27826abde6eacef0ffbc9686a030647c33"
+        "statusCode": 0,
+        "statusText": "成功。",
+        "token": "07c08e27826abde6eacef0ffbc9686a030647c33",
     }
     ```
 
@@ -40,10 +43,10 @@
 - 方式 `post`
 - 路径 `/write/college`
 - 参数
-    - college `String`
-    - specialty `String`
-    - grade `String`
-    - class `String`
+  - college `String`
+  - specialty `String`
+  - grade `String`
+  - class `String`
 - 需要对数据是否重复进行判断
 
 调用例子
@@ -65,18 +68,19 @@
 
 - 路径 `/read/college`
 - 返回数据
-    - college `String`
-    - specialty `String`
-    - grade `String`
-    - class `String`
-    - sum `String`
+  - college `String`
+  - specialty `String`
+  - grade `String`
+  - class `String`
+  - sum `String`
 
 调用例子
 
 - 响应
 
     ```json
-    [
+    {
+        "data": [
         {
             "college": "计算机科学与网络工程学院",
             "specialty": "软件工程",
@@ -97,8 +101,8 @@
             "grade": "15",
             "class": "2",
             "sum": "41"
-        }
-    ]
+        }]
+    }
     ```
 ## 信息删除
 
