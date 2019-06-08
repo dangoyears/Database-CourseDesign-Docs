@@ -37,7 +37,7 @@
 ## 信息登入
 
 ### 学院信息登入
-
+- 方式 `post`
 - 路径 `/write/college`
 - 参数
     - college `String`
@@ -54,12 +54,10 @@
     {
         "college": "计算机科学与网络工程学院",
         "specialty": "软件工程",
-        "grade": "17级",
-        "class": "1班"
+        "grade": "17",
+        "class": "1"
     }
     ```
-
-- 说明：若 `specialtyName` 和 `className` 为空则代表只创建学院，若 `className` 为空则代表只创建专业。
 
 ## 信息获取
 
@@ -82,26 +80,41 @@
         {
             "college": "计算机科学与网络工程学院",
             "specialty": "软件工程",
-            "grade": "17级",
-            "class": "1班",
+            "grade": "17",
+            "class": "1",
             "sum": "41"
         },
         {
             "college": "计算机科学与网络工程学院",
             "specialty": "软件工程",
-            "grade": "18级",
-            "class": "4班",
+            "grade": "18",
+            "class": "4",
             "sum": "40"
         },
         {
             "college": "人文学院",
             "specialty": "汉语言文学",
-            "grade": "15级",
-            "class": "2班",
+            "grade": "15",
+            "class": "2",
             "sum": "41"
         }
-        .....
     ]
+    ```
+## 信息删除
+
+### 班级信息删除
+
+- 路径 `/delete/class`
+- 参数
+
+    ```json
+        {
+            "college": "计算机科学与网络工程学院",
+            "specialty": "软件工程",
+            "grade": "17",
+            "class": "1",
+            "sum": "41"
+        }
     ```
 
 ## 其他操作
