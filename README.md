@@ -2,6 +2,7 @@
 
 ## 基本信息
 
+- 前端地址 `http://dangosky.com/dbcourse/`
 - 后端地址 `https://dbcd.qfstudio.net`
 - ~~服务器端的响应均包含statusCode `Number`和statusText `String`字段。~~（正在调试）
 
