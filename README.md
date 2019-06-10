@@ -6,6 +6,7 @@
     - [学生信息登入](#学生信息登入)
 - [信息获取](#信息获取)
     - [学院信息获取](#学院信息获取)
+    - [学生信息获取](#学生信息获取)
 - [信息删除](#信息删除)
     - [班级信息删除](#班级信息删除)
 - [其他操作](#其他操作)
@@ -87,7 +88,6 @@
   - sex `String`
   - birthday `String`
   - age `String`
-- 注意：需要对数据是否重复进行判断
 
 调用例子
 
@@ -99,14 +99,15 @@
         "specialty": "软件工程",
         "grade": "17",
         "class": "1",
-        "name": "XXX",
+        "name": "xxx",
         "studentId": "1706300032",
         "status": "在读本科",
         "sex": "男",
-        "birthday": "Sun Sep 06 1998 00:00:00 GMT+0800 (中国标准时间)",
-        "age": "21
+        "birthday": "xxxx-xx-xx",
+        "age": "21"
     }
     ```
+- **备注**：先查询数据库中是否已经存在该学生信息（根据学号查询），若没有则创建，已经存在的话则进行信息修改。
 
 ## 信息获取
 
@@ -127,29 +128,81 @@
     ```json
     {
         "data": [
-        {
-            "college": "计算机科学与网络工程学院",
-            "specialty": "软件工程",
-            "grade": "17",
-            "class": "1",
-            "sum": "41"
-        },
-        {
-            "college": "计算机科学与网络工程学院",
-            "specialty": "软件工程",
-            "grade": "18",
-            "class": "4",
-            "sum": "40"
-        },
-        {
-            "college": "人文学院",
-            "specialty": "汉语言文学",
-            "grade": "15",
-            "class": "2",
-            "sum": "41"
-        }]
+            {
+                "college": "计算机科学与网络工程学院",
+                "specialty": "软件工程",
+                "grade": "17",
+                "class": "1",
+                "sum": "41"
+            },
+            {
+                "college": "计算机科学与网络工程学院",
+                "specialty": "软件工程",
+                "grade": "18",
+                "class": "4",
+                "sum": "40"
+            },
+            {
+                "college": "人文学院",
+                "specialty": "汉语言文学",
+                "grade": "15",
+                "class": "2",
+                "sum": "41"
+            }
+        ]
     }
     ```
+
+### 学生信息获取
+
+- 路径 `/read/student`
+- 返回数据
+  - college `String`
+  - specialty `String`
+  - grade `String`
+  - class `String`
+  - name `String`
+  - studentId `String`
+  - status `String`
+  - sex `String`
+  - birthday `String`
+  - age `String`
+
+调用例子
+
+- 响应
+
+    ```json
+    {
+        "data": [
+            {
+                "college": "计算机科学与网络工程学院",
+                "specialty": "软件工程",
+                "grade": "17",
+                "class": "1",
+                "name": "xxx",
+                "studentId": "1706300032",
+                "status": "在读本科",
+                "sex": "男",
+                "birthday": "xxxx-xx-xx",
+                "age": "21"
+            }
+            {
+                "college": "人文学院",
+                "specialty": "汉语言文学",
+                "grade": "18",
+                "class": "1",
+                "name": "xxx",
+                "studentId": "1806300027",
+                "status": "在读本科",
+                "sex": "女",
+                "birthday": "xxxx-xx-xx",
+                "age": "21"
+            }
+        ]
+    }
+    ```
+
 ## 信息删除
 
 ### 班级信息删除
