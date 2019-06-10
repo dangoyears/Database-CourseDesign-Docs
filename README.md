@@ -47,7 +47,7 @@
   - specialty `String`
   - grade `String`
   - class `String`
-- 需要对数据是否重复进行判断
+- 注意：需要对数据是否重复进行判断
 
 调用例子
 
@@ -59,6 +59,41 @@
         "specialty": "软件工程",
         "grade": "17",
         "class": "1"
+    }
+    ```
+
+### 学生信息登入
+- 方式 `post`
+- 路径 `/write/student`
+- 参数
+  - college `String`
+  - specialty `String`
+  - grade `String`
+  - class `String`
+  - name `String`
+  - studentId `String`
+  - status `String`
+  - sex `String`
+  - birthday `String`
+  - age `String`
+- 注意：需要对数据是否重复进行判断
+
+调用例子
+
+- 发送参数
+
+    ```json
+    {
+        "college": "计算机科学与网络工程学院",
+        "specialty": "软件工程",
+        "grade": "17",
+        "class": "1",
+        "name": "XXX",
+        "studentId": "1706300032",
+        "status": "在读本科",
+        "sex": "男",
+        "birthday": "Sun Sep 06 1998 00:00:00 GMT+0800 (中国标准时间)",
+        "age": "21
     }
     ```
 
