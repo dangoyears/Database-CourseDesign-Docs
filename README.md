@@ -19,6 +19,11 @@
 
 - 前端地址 `http://dangosky.com/dbcourse/`
 - 后端地址 `https://dbcd.qfstudio.net`
+- 参数形式 使用JSON格式
+  - 服务器的响应为JSON对象，顶层JSON对象总是包含`msg: String`和`code: Number`字段。
+  - `msg`为开发调试可能有用的信息。
+  - `code`为状态码，非零状态码表示操作成功完成。状态码可能为负。
+- HTTP方法 同时支持`GET`和`POST`
 
 ## 用户登陆
 
@@ -28,7 +33,7 @@
   - pass `String`
   - type `String` in {`"admin"`, `"teacher"`, `"student"`}
 - 响应
-  - token `String`
+  - token `String` 非空；登陆失败时返回空字符串`""`。
 
 调用例子
 
@@ -36,7 +41,7 @@
 
     ```json
     {
-        "user": "17063000xx",
+        "user": "dangoyears",
         "pass": "dangoyears",
         "type": "admin"
     }
@@ -46,9 +51,9 @@
 
     ```json
     {
-        "statusCode": 0,
-        "statusText": "成功。",
-        "token": "07c08e27826abde6eacef0ffbc9686a030647c33",
+        "code": 0,
+        "msg": "认证成功。",
+        "token": "gFr3i1qqIAKL9HoEajSfGJRnQ3KkysLX"
     }
     ```
 
