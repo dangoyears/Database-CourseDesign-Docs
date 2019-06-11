@@ -61,7 +61,6 @@
 
 ### 学院信息登入
 
-- 方式 `post`
 - 路径 `/write/college`
 - 参数
   - college `String`
@@ -85,7 +84,6 @@
 
 ### 学生信息登入
 
-- 方式 `post`
 - 路径 `/write/student`
 - 参数
   - college `String`
@@ -127,7 +125,6 @@
 
 ### 教师信息登入
 
-- 方式 `post`
 - 路径 `/write/teacher`
 - 参数
   - college `String`
