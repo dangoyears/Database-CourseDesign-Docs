@@ -1,14 +1,19 @@
 # 前后端交互接口
+
+**接口实现进度** 目前部署了“角色状态”接口以及“信息获取”假接口。
+
 - [基本信息](#基本信息)
-- [登陆](#用户登陆)
+- [角色状态](#角色状态)
+  - [用户登陆](#用户登陆)
+  - [用户注销](#用户注销)
 - [信息登入](#信息登入)
   - [学院信息登入](#学院信息登入)
   - [教师信息登入](#教师信息登入)
   - [学生信息登入](#学生信息登入)
-  - [信息获取](#信息获取)
-- [学院信息获取](#学院信息获取)
-- [教师信息获取](#教师信息获取)
-- [学生信息获取](#学生信息获取)
+- [信息获取](#信息获取)
+  - [学院信息获取](#学院信息获取)
+  - [教师信息获取](#教师信息获取)
+  - [学生信息获取](#学生信息获取)
 - [信息删除](#信息删除)
   - [班级信息删除](#班级信息删除)
   - [学生/教师信息删除](#学生/教师信息删除)
@@ -18,9 +23,15 @@
 
 - 前端地址 `http://dangosky.com/dbcourse/`
 - 后端地址 `https://dbcd.qfstudio.net`
-- ~~服务器端的响应均包含statusCode `Number`和statusText `String`字段。~~（正在调试）
+- 参数形式 使用JSON格式。
+  - 服务器的响应为JSON对象，顶层JSON对象总是包含“基本响应”：`msg: String`和`code: Number`字段。
+  - `msg`为开发调试可能有用的信息。
+  - `code`为状态码，非零状态码表示操作成功完成。状态码可能为负。
+- HTTP方法 同时支持`GET`和`POST`。
 
-## 用户登陆
+## 角色状态
+
+### 用户登陆
 
 - 路径 `/login`
 - 必选参数
@@ -28,7 +39,7 @@
   - pass `String`
   - type `String` in {`"admin"`, `"teacher"`, `"student"`}
 - 响应
-  - token `String`
+  - token `String` 非空；登陆失败时返回空字符串`""`。
 
 调用例子
 
@@ -36,7 +47,7 @@
 
     ```json
     {
-        "user": "17063000xx",
+        "user": "dangoyears",
         "pass": "dangoyears",
         "type": "admin"
     }
@@ -46,16 +57,29 @@
 
     ```json
     {
-        "statusCode": 0,
-        "statusText": "成功。",
-        "token": "07c08e27826abde6eacef0ffbc9686a030647c33",
+        "code": 0,
+        "msg": "认证成功。",
+        "token": "gFr3i1qqIAKL9HoEajSfGJRnQ3KkysLX"
     }
     ```
+
+### 用户注销
+
+- 路径 `/logout`
+- 必选参数
+  - token `String` 在[用户登陆](#用户登陆)路由中取得的token。
+- 响应 仅包含基本响应。
+
+### 关于token
+
+若API接口中提及“权限”字段，则表明该API接口仅对特定角色的用户开放。
+在使用这类接口时，需要传入在`/login`接口中取得的token参数。
 
 ## 信息登入
 
 ### 学院信息登入
-- 方式 `post`
+
+- 权限 `admin`
 - 路径 `/write/college`
 - 参数
   - college `String`
@@ -78,7 +102,8 @@
     ```
 
 ### 学生信息登入
-- 方式 `post`
+
+- 权限 `admin`
 - 路径 `/write/student`
 - 参数
   - college `String`
@@ -114,23 +139,25 @@
         "password": "310612"
     }
     ```
+
 - **备注**：先查询数据库中是否已经存在该学生信息（根据学号查询），若没有则创建，已经存在的话则进行信息修改。
 - **说明**：若是创建学生个人信息的话，还需要将 `studentId` 和 `password` 加入到学生登陆验证表单中。
 
 ### 教师信息登入
-- 方式 `post`
+
+- 权限 `admin`
 - 路径 `/write/teacher`
 - 参数
-    - college `String`
-    - name `String`
-    - jobId `String`
-    - sex `String`
-    - education `String`
-    - graduation `String`
-    - birthday `String`
-    - age `String`
-    - idCard `String`
-    - password `String`
+  - college `String`
+  - name `String`
+  - jobId `String`
+  - sex `String`
+  - education `String`
+  - graduation `String`
+  - birthday `String`
+  - age `String`
+  - idCard `String`
+  - password `String`
 
 调用例子
 
@@ -150,6 +177,7 @@
         "password": "310612"
     }
     ```
+
 - **备注**：先查询数据库中是否已经存在该教师信息（根据工号查询），若没有则创建，已经存在的话则进行信息修改。
 - **说明**：若是创建教师个人信息的话，还需要将 `jobId` 和 `password` 加入到教师登陆验证表单中。
 
@@ -254,15 +282,15 @@
 
 - 路径 `/read/teacher`
 - 返回数据
-    - college `String`
-    - name `String`
-    - jobId `String`
-    - sex `String`
-    - education `String`
-    - graduation `String`
-    - birthday `String`
-    - age `String`
-    - idCard `String`
+  - college `String`
+  - name `String`
+  - jobId `String`
+  - sex `String`
+  - education `String`
+  - graduation `String`
+  - birthday `String`
+  - age `String`
+  - idCard `String`
 
 调用例子
 
@@ -313,29 +341,35 @@
             "sum": "41"
         }
     ```
+
 - 说明：需要综合学院、专业、年级、班级等信息删除数据。
 
 ### 学生/教师信息删除
 
 - 路径 `/delete/both`
 - 参数
-    - type `String`
-    - id `String`
+  - type `String`
+  - id `String`
 - 说明：根据 `type` 指定要删除的用户类型（学生或教师），通过唯一的学号 / 工号来查找删除即可。
 - **备注**：还需要从学生 / 教师登陆表单中删去相应的登陆账号。
 
 调用例子
-    - 发送参数
 
-        ```json
-            {
-                "type": "student",
-                "id": "xxxxxxxxxx"
-            }
-        ```
+- 发送参数
 
+    ```json
+        {
+            "type": "student",
+            "id": "xxxxxxxxxx"
+        }
+    ```
 
 ## 其他操作
 
-- 必选参数
-  - token
+### 欢迎路由
+
+- 路径 `/`, `/welcome`
+- 返回服务器的欢迎信息。
+- 响应
+  - ver `String` 服务器软件版本
+  - doc `String` 后端文档链接
