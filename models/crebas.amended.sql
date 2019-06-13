@@ -10,7 +10,7 @@ create or replace package PDTypes
 as
     TYPE ref_cursor IS REF CURSOR;
 end;
-
+/
 -- Integrity package declaration
 create or replace package IntegrityPackage AS
  procedure InitNestLevel;
@@ -724,8 +724,8 @@ alter table "TeacherTeachsCourse"
 
 create or replace trigger "CompoundDeleteTrigger_class"
 for delete on "Class" compound trigger
-// Declaration
-// Body
+-- Declaration
+-- Body
   before statement is
   begin
      NULL;
@@ -746,14 +746,14 @@ for delete on "Class" compound trigger
      NULL;
   end after statement;
 
-END
+END;
 /
 
 
 create or replace trigger "CompoundInsertTrigger_class"
 for insert on "Class" compound trigger
-// Declaration
-// Body
+-- Declaration
+-- Body
   before statement is
   begin
      NULL;
@@ -774,14 +774,14 @@ for insert on "Class" compound trigger
      NULL;
   end after statement;
 
-END
+END;
 /
 
 
 create or replace trigger "CompoundUpdateTrigger_class"
 for update on "Class" compound trigger
-// Declaration
-// Body
+-- Declaration
+-- Body
   before statement is
   begin
      NULL;
@@ -802,7 +802,7 @@ for update on "Class" compound trigger
      NULL;
   end after statement;
 
-END
+END;
 /
 
 
@@ -817,7 +817,7 @@ declare
 
 begin
     --  Column ""ClassID"" uses sequence IDSequence
-    select IDSequence.NEXTVAL INTO :new."ClassID" from dual;
+    select "IDSequence".NEXTVAL INTO :new."ClassID" from dual;
 
 --  Errors handling
 exception
@@ -829,8 +829,8 @@ end;
 
 create or replace trigger "CompoundDeleteTrigger_classroo"
 for delete on "ClassRoom" compound trigger
-// Declaration
-// Body
+-- Declaration
+-- Body
   before statement is
   begin
      NULL;
@@ -851,14 +851,14 @@ for delete on "ClassRoom" compound trigger
      NULL;
   end after statement;
 
-END
+END;
 /
 
 
 create or replace trigger "CompoundInsertTrigger_classroo"
 for insert on "ClassRoom" compound trigger
-// Declaration
-// Body
+-- Declaration
+-- Body
   before statement is
   begin
      NULL;
@@ -879,14 +879,14 @@ for insert on "ClassRoom" compound trigger
      NULL;
   end after statement;
 
-END
+END;
 /
 
 
 create or replace trigger "CompoundUpdateTrigger_classroo"
 for update on "ClassRoom" compound trigger
-// Declaration
-// Body
+-- Declaration
+-- Body
   before statement is
   begin
      NULL;
@@ -907,7 +907,7 @@ for update on "ClassRoom" compound trigger
      NULL;
   end after statement;
 
-END
+END;
 /
 
 
@@ -922,7 +922,7 @@ declare
 
 begin
     --  Column ""ClassroomID"" uses sequence IDSequence
-    select IDSequence.NEXTVAL INTO :new."ClassroomID" from dual;
+    select "IDSequence".NEXTVAL INTO :new."ClassroomID" from dual;
 
 --  Errors handling
 exception
@@ -934,8 +934,8 @@ end;
 
 create or replace trigger "CompoundDeleteTrigger_college"
 for delete on "College" compound trigger
-// Declaration
-// Body
+-- Declaration
+-- Body
   before statement is
   begin
      NULL;
@@ -956,14 +956,14 @@ for delete on "College" compound trigger
      NULL;
   end after statement;
 
-END
+END;
 /
 
 
 create or replace trigger "CompoundInsertTrigger_college"
 for insert on "College" compound trigger
-// Declaration
-// Body
+-- Declaration
+-- Body
   before statement is
   begin
      NULL;
@@ -984,14 +984,14 @@ for insert on "College" compound trigger
      NULL;
   end after statement;
 
-END
+END;
 /
 
 
 create or replace trigger "CompoundUpdateTrigger_college"
 for update on "College" compound trigger
-// Declaration
-// Body
+-- Declaration
+-- Body
   before statement is
   begin
      NULL;
@@ -1012,7 +1012,7 @@ for update on "College" compound trigger
      NULL;
   end after statement;
 
-END
+END;
 /
 
 
@@ -1027,7 +1027,7 @@ declare
 
 begin
     --  Column ""CollegeID"" uses sequence IDSequence
-    select IDSequence.NEXTVAL INTO :new."CollegeID" from dual;
+    select "IDSequence".NEXTVAL INTO :new."CollegeID" from dual;
 
 --  Errors handling
 exception
@@ -1039,8 +1039,8 @@ end;
 
 create or replace trigger "CompoundDeleteTrigger_course"
 for delete on "Course" compound trigger
-// Declaration
-// Body
+-- Declaration
+-- Body
   before statement is
   begin
      NULL;
@@ -1061,14 +1061,14 @@ for delete on "Course" compound trigger
      NULL;
   end after statement;
 
-END
+END;
 /
 
 
 create or replace trigger "CompoundInsertTrigger_course"
 for insert on "Course" compound trigger
-// Declaration
-// Body
+-- Declaration
+-- Body
   before statement is
   begin
      NULL;
@@ -1089,14 +1089,14 @@ for insert on "Course" compound trigger
      NULL;
   end after statement;
 
-END
+END;
 /
 
 
 create or replace trigger "CompoundUpdateTrigger_course"
 for update on "Course" compound trigger
-// Declaration
-// Body
+-- Declaration
+-- Body
   before statement is
   begin
      NULL;
@@ -1117,7 +1117,7 @@ for update on "Course" compound trigger
      NULL;
   end after statement;
 
-END
+END;
 /
 
 
@@ -1132,7 +1132,7 @@ declare
 
 begin
     --  Column ""CourseID"" uses sequence IDSequence
-    select IDSequence.NEXTVAL INTO :new."CourseID" from dual;
+    select "IDSequence".NEXTVAL INTO :new."CourseID" from dual;
 
 --  Errors handling
 exception
@@ -1144,8 +1144,8 @@ end;
 
 create or replace trigger "CompoundDeleteTrigger_coursepr"
 for delete on "CourseProgram" compound trigger
-// Declaration
-// Body
+-- Declaration
+-- Body
   before statement is
   begin
      NULL;
@@ -1166,14 +1166,14 @@ for delete on "CourseProgram" compound trigger
      NULL;
   end after statement;
 
-END
+END;
 /
 
 
 create or replace trigger "CompoundInsertTrigger_coursepr"
 for insert on "CourseProgram" compound trigger
-// Declaration
-// Body
+-- Declaration
+-- Body
   before statement is
   begin
      NULL;
@@ -1194,14 +1194,14 @@ for insert on "CourseProgram" compound trigger
      NULL;
   end after statement;
 
-END
+END;
 /
 
 
 create or replace trigger "CompoundUpdateTrigger_coursepr"
 for update on "CourseProgram" compound trigger
-// Declaration
-// Body
+-- Declaration
+-- Body
   before statement is
   begin
      NULL;
@@ -1222,7 +1222,7 @@ for update on "CourseProgram" compound trigger
      NULL;
   end after statement;
 
-END
+END;
 /
 
 
@@ -1237,7 +1237,7 @@ declare
 
 begin
     --  Column ""CourseProgramID"" uses sequence IDSequence
-    select IDSequence.NEXTVAL INTO :new."CourseProgramID" from dual;
+    select "IDSequence".NEXTVAL INTO :new."CourseProgramID" from dual;
 
 --  Errors handling
 exception
@@ -1249,8 +1249,8 @@ end;
 
 create or replace trigger "CompoundDeleteTrigger_human"
 for delete on "Human" compound trigger
-// Declaration
-// Body
+-- Declaration
+-- Body
   before statement is
   begin
      NULL;
@@ -1271,14 +1271,14 @@ for delete on "Human" compound trigger
      NULL;
   end after statement;
 
-END
+END;
 /
 
 
 create or replace trigger "CompoundInsertTrigger_human"
 for insert on "Human" compound trigger
-// Declaration
-// Body
+-- Declaration
+-- Body
   before statement is
   begin
      NULL;
@@ -1299,14 +1299,14 @@ for insert on "Human" compound trigger
      NULL;
   end after statement;
 
-END
+END;
 /
 
 
 create or replace trigger "CompoundUpdateTrigger_human"
 for update on "Human" compound trigger
-// Declaration
-// Body
+-- Declaration
+-- Body
   before statement is
   begin
      NULL;
@@ -1327,7 +1327,7 @@ for update on "Human" compound trigger
      NULL;
   end after statement;
 
-END
+END;
 /
 
 
@@ -1342,7 +1342,7 @@ declare
 
 begin
     --  Column ""HumanID"" uses sequence IDSequence
-    select IDSequence.NEXTVAL INTO :new."HumanID" from dual;
+    select "IDSequence".NEXTVAL INTO :new."HumanID" from dual;
 
 --  Errors handling
 exception
@@ -1354,8 +1354,8 @@ end;
 
 create or replace trigger "CompoundDeleteTrigger_semester"
 for delete on "Semester" compound trigger
-// Declaration
-// Body
+-- Declaration
+-- Body
   before statement is
   begin
      NULL;
@@ -1376,14 +1376,14 @@ for delete on "Semester" compound trigger
      NULL;
   end after statement;
 
-END
+END;
 /
 
 
 create or replace trigger "CompoundInsertTrigger_semester"
 for insert on "Semester" compound trigger
-// Declaration
-// Body
+-- Declaration
+-- Body
   before statement is
   begin
      NULL;
@@ -1404,14 +1404,14 @@ for insert on "Semester" compound trigger
      NULL;
   end after statement;
 
-END
+END;
 /
 
 
 create or replace trigger "CompoundUpdateTrigger_semester"
 for update on "Semester" compound trigger
-// Declaration
-// Body
+-- Declaration
+-- Body
   before statement is
   begin
      NULL;
@@ -1432,7 +1432,7 @@ for update on "Semester" compound trigger
      NULL;
   end after statement;
 
-END
+END;
 /
 
 
@@ -1447,7 +1447,7 @@ declare
 
 begin
     --  Column ""SmesterID"" uses sequence IDSequence
-    select IDSequence.NEXTVAL INTO :new."SmesterID" from dual;
+    select "IDSequence".NEXTVAL INTO :new."SmesterID" from dual;
 
 --  Errors handling
 exception
@@ -1459,8 +1459,8 @@ end;
 
 create or replace trigger "CompoundDeleteTrigger_specialt"
 for delete on "Specialty" compound trigger
-// Declaration
-// Body
+-- Declaration
+-- Body
   before statement is
   begin
      NULL;
@@ -1481,14 +1481,14 @@ for delete on "Specialty" compound trigger
      NULL;
   end after statement;
 
-END
+END;
 /
 
 
 create or replace trigger "CompoundInsertTrigger_specialt"
 for insert on "Specialty" compound trigger
-// Declaration
-// Body
+-- Declaration
+-- Body
   before statement is
   begin
      NULL;
@@ -1509,14 +1509,14 @@ for insert on "Specialty" compound trigger
      NULL;
   end after statement;
 
-END
+END;
 /
 
 
 create or replace trigger "CompoundUpdateTrigger_specialt"
 for update on "Specialty" compound trigger
-// Declaration
-// Body
+-- Declaration
+-- Body
   before statement is
   begin
      NULL;
@@ -1537,7 +1537,7 @@ for update on "Specialty" compound trigger
      NULL;
   end after statement;
 
-END
+END;
 /
 
 
@@ -1552,7 +1552,7 @@ declare
 
 begin
     --  Column ""SpecialtyID"" uses sequence IDSequence
-    select IDSequence.NEXTVAL INTO :new."SpecialtyID" from dual;
+    select "IDSequence".NEXTVAL INTO :new."SpecialtyID" from dual;
 
 --  Errors handling
 exception
