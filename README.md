@@ -1,5 +1,7 @@
 # 前后端交互接口
 
+**接口实现进度** 目前部署了“角色状态”接口以及“信息获取”假接口。
+
 - [基本信息](#基本信息)
 - [角色状态](#角色状态)
   - [用户登陆](#用户登陆)
@@ -15,10 +17,8 @@
   - [学生信息获取](#学生信息获取)
 - [信息删除](#信息删除)
   - [班级信息删除](#班级信息删除)
-  - [学生/教师信息删除](#学生/教师信息删除)
+  - [学生/教师信息删除](#学生教师信息删除)
 - [其他操作](#其他操作)
-
-**接口实现进度** 目前部署了“角色状态”和“信息获取”接口。
 
 ## 基本信息
 
@@ -41,6 +41,7 @@
   - type `String` in {`"admin"`, `"teacher"`, `"student"`}
 - 响应
   - token `String` 非空；登陆失败时返回空字符串`""`。
+- 备注：若 `type` 为 teacher，还需返回一个标记 `identity` 表示该教师是否为教务办主任。否则可不返回 `identity`。
 
 调用例子
 
@@ -60,7 +61,8 @@
     {
         "code": 0,
         "msg": "认证成功。",
-        "token": "gFr3i1qqIAKL9HoEajSfGJRnQ3KkysLX"
+        "token": "gFr3i1qqIAKL9HoEajSfGJRnQ3KkysLX",
+        "identity": "superTeacher"
     }
     ```
 
@@ -159,6 +161,7 @@
   - age `String`
   - idCard `String`
   - password `String`
+  - identity `String`
 
 调用例子
 
@@ -175,7 +178,8 @@
         "birthday": "xxxx-xx-xx",
         "age": "xx",
         "idCard": "440582199708310612",
-        "password": "310612"
+        "password": "310612",
+        "identity": "教务办主任"
     }
     ```
 
@@ -292,6 +296,7 @@
   - birthday `String`
   - age `String`
   - idCard `String`
+  - identity `String`
 
 调用例子
 
@@ -310,6 +315,7 @@
                 "birthday": "xxxx-xx-xx",
                 "age": "xx",
                 "idCard": "440582199708310612",
+                "identity": "教务办主任"  
             }
             {
                 "college": "人文学院",
@@ -321,6 +327,7 @@
                 "birthday": "xxxx-xx-xx",
                 "age": "xx",
                 "idCard": "440582199708310612",
+                "identity": "普通教师"
             }
         ]
     }
