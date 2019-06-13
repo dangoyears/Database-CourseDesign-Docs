@@ -120,6 +120,7 @@
   - age `String`
   - idCard `String`
   - password `String`
+  - yearSystem `String`
 
 调用例子
 
@@ -133,12 +134,13 @@
         "class": "1",
         "name": "xxx",
         "studentId": "1706300032",
-        "status": "在读本科",
+        "status": "在读本科生",
         "sex": "男",
         "birthday": "xxxx-xx-xx",
         "age": "21",
         "idCard": "440582199708310612",
-        "password": "310612"
+        "password": "310612",
+        "yearSystem": "4"
     }
     ```
 
@@ -160,7 +162,7 @@
   - age `String`
   - idCard `String`
   - password `String`
-  - identity `String`
+  - status `String`
 
 调用例子
 
@@ -178,7 +180,7 @@
         "age": "xx",
         "idCard": "440582199708310612",
         "password": "310612",
-        "identity": "教务办主任"
+        "status": "教务办主任"
     }
     ```
 
@@ -244,6 +246,7 @@
   - birthday `String`
   - age `String`
   - idCard `String`
+  - yearSystem `String`
 
 调用例子
 
@@ -264,6 +267,7 @@
                 "birthday": "xxxx-xx-xx",
                 "age": "21",
                 "idCard": "440582199708310612",
+                "yearSystem": "4"
             }
             {
                 "college": "人文学院",
@@ -277,6 +281,7 @@
                 "birthday": "xxxx-xx-xx",
                 "age": "21",
                 "idCard": "440582199708310612",
+                "yearSystem": "5"
             }
         ]
     }
@@ -295,7 +300,7 @@
   - birthday `String`
   - age `String`
   - idCard `String`
-  - identity `String`
+  - status `String`
 
 调用例子
 
@@ -314,7 +319,7 @@
                 "birthday": "xxxx-xx-xx",
                 "age": "xx",
                 "idCard": "440582199708310612",
-                "identity": "教务办主任"  
+                "status": "教务办主任"  
             }
             {
                 "college": "人文学院",
@@ -326,7 +331,7 @@
                 "birthday": "xxxx-xx-xx",
                 "age": "xx",
                 "idCard": "440582199708310612",
-                "identity": "普通教师"
+                "status": "普通教师"
             }
         ]
     }
