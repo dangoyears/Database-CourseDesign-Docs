@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 11g                           */
-/* Created on:     2019/6/13 21:10:59                           */
+/* Created on:     2019/6/16 0:12:35                            */
 /*==============================================================*/
 
 
@@ -11,6 +11,7 @@ as
     TYPE ref_cursor IS REF CURSOR;
 end;
 /
+
 -- Integrity package declaration
 create or replace package IntegrityPackage AS
  procedure InitNestLevel;
@@ -195,11 +196,11 @@ alter table "Student"
    drop constraint FK_STUDENT_STUDENTBE_CLASS
 /
 
-alter table "StudentAttendCourse"
+alter table "StudentAttendsCourse"
    drop constraint FK_STUDENTA_STUDENTAT_COURSE
 /
 
-alter table "StudentAttendCourse"
+alter table "StudentAttendsCourse"
    drop constraint FK_STUDENTA_STUDENTAT_STUDENT
 /
 
@@ -234,7 +235,7 @@ drop index "TeacherMangeClass_FK"
 drop table "Class" cascade constraints
 /
 
-drop table "ClassRoom" cascade constraints
+drop table "Classroom" cascade constraints
 /
 
 drop table "College" cascade constraints
@@ -288,7 +289,7 @@ drop index "StudentAttendCourse2_FK"
 drop index "StudentAttendCourse_FK"
 /
 
-drop table "StudentAttendCourse" cascade constraints
+drop table "StudentAttendsCourse" cascade constraints
 /
 
 drop index "TeacherBelongsToCollege_FK"
@@ -310,6 +311,10 @@ drop sequence "IDSequence"
 /
 
 create sequence "IDSequence"
+increment by 1
+start with 1
+ nomaxvalue
+nocycle
 /
 
 /*==============================================================*/
@@ -364,9 +369,9 @@ create index "ClassBelongsToSpecialty_FK" on "Class" (
 /
 
 /*==============================================================*/
-/* Table: "ClassRoom"                                           */
+/* Table: "Classroom"                                           */
 /*==============================================================*/
-create table "ClassRoom" 
+create table "Classroom" 
 (
    "ClassroomID"        INTEGER              not null,
    "Location"           NVARCHAR2(64)        not null,
@@ -468,10 +473,11 @@ create table "Human"
    "Sex"                NCHAR(1)            
       constraint CKC_SEX_HUMAN check ("Sex" is null or ("Sex" in ('ÄÐ','Å®'))),
    "Birthday"           DATE,
-   "Identity"           CHAR(18),
+   "Identity"           CHAR(18)             not null,
    "Notes"              CLOB,
    "PasswordHash"       VARCHAR2(1024),
-   constraint PK_HUMAN primary key ("HumanID")
+   constraint PK_HUMAN primary key ("HumanID"),
+   constraint AK_IDENTITY_HUMAN unique ("Identity")
 )
 /
 
@@ -561,21 +567,21 @@ create index "StudentBelongsToClass_FK" on "Student" (
 /
 
 /*==============================================================*/
-/* Table: "StudentAttendCourse"                                 */
+/* Table: "StudentAttendsCourse"                                */
 /*==============================================================*/
-create table "StudentAttendCourse" 
+create table "StudentAttendsCourse" 
 (
    "CourseID"           INTEGER              not null,
    "StudentHumanID"     INTEGER              not null,
    "Score"              INTEGER,
-   constraint PK_STUDENTATTENDCOURSE primary key ("CourseID", "StudentHumanID")
+   constraint PK_STUDENTATTENDSCOURSE primary key ("CourseID", "StudentHumanID")
 )
 /
 
 /*==============================================================*/
 /* Index: "StudentAttendCourse_FK"                              */
 /*==============================================================*/
-create index "StudentAttendCourse_FK" on "StudentAttendCourse" (
+create index "StudentAttendCourse_FK" on "StudentAttendsCourse" (
    "CourseID" ASC
 )
 /
@@ -583,7 +589,7 @@ create index "StudentAttendCourse_FK" on "StudentAttendCourse" (
 /*==============================================================*/
 /* Index: "StudentAttendCourse2_FK"                             */
 /*==============================================================*/
-create index "StudentAttendCourse2_FK" on "StudentAttendCourse" (
+create index "StudentAttendCourse2_FK" on "StudentAttendsCourse" (
    "StudentHumanID" ASC
 )
 /
@@ -668,7 +674,7 @@ alter table "CourseProgram"
 
 alter table "CourseProgram"
    add constraint FK_COURSEPR_COURSETAK_CLASSROO foreign key ("ClassroomID")
-      references "ClassRoom" ("ClassroomID")
+      references "Classroom" ("ClassroomID")
 /
 
 alter table "Semester"
@@ -691,12 +697,12 @@ alter table "Student"
       references "Class" ("ClassID")
 /
 
-alter table "StudentAttendCourse"
+alter table "StudentAttendsCourse"
    add constraint FK_STUDENTA_STUDENTAT_COURSE foreign key ("CourseID")
       references "Course" ("CourseID")
 /
 
-alter table "StudentAttendCourse"
+alter table "StudentAttendsCourse"
    add constraint FK_STUDENTA_STUDENTAT_STUDENT foreign key ("StudentHumanID")
       references "Student" ("HumanID")
 /
@@ -745,9 +751,7 @@ for delete on "Class" compound trigger
   begin
      NULL;
   end after statement;
-
-END;
-/
+END;/
 
 
 create or replace trigger "CompoundInsertTrigger_class"
@@ -773,9 +777,7 @@ for insert on "Class" compound trigger
   begin
      NULL;
   end after statement;
-
-END;
-/
+END;/
 
 
 create or replace trigger "CompoundUpdateTrigger_class"
@@ -801,9 +803,7 @@ for update on "Class" compound trigger
   begin
      NULL;
   end after statement;
-
-END;
-/
+END;/
 
 
 create trigger "tib_class" before insert
@@ -828,7 +828,7 @@ end;
 
 
 create or replace trigger "CompoundDeleteTrigger_classroo"
-for delete on "ClassRoom" compound trigger
+for delete on "Classroom" compound trigger
 -- Declaration
 -- Body
   before statement is
@@ -850,13 +850,11 @@ for delete on "ClassRoom" compound trigger
   begin
      NULL;
   end after statement;
-
-END;
-/
+END;/
 
 
 create or replace trigger "CompoundInsertTrigger_classroo"
-for insert on "ClassRoom" compound trigger
+for insert on "Classroom" compound trigger
 -- Declaration
 -- Body
   before statement is
@@ -878,13 +876,11 @@ for insert on "ClassRoom" compound trigger
   begin
      NULL;
   end after statement;
-
-END;
-/
+END;/
 
 
 create or replace trigger "CompoundUpdateTrigger_classroo"
-for update on "ClassRoom" compound trigger
+for update on "Classroom" compound trigger
 -- Declaration
 -- Body
   before statement is
@@ -906,13 +902,11 @@ for update on "ClassRoom" compound trigger
   begin
      NULL;
   end after statement;
-
-END;
-/
+END;/
 
 
 create trigger "tib_classroom" before insert
-on "ClassRoom" for each row
+on "Classroom" for each row
 declare
     integrity_error  exception;
     errno            integer;
@@ -955,9 +949,7 @@ for delete on "College" compound trigger
   begin
      NULL;
   end after statement;
-
-END;
-/
+END;/
 
 
 create or replace trigger "CompoundInsertTrigger_college"
@@ -983,9 +975,7 @@ for insert on "College" compound trigger
   begin
      NULL;
   end after statement;
-
-END;
-/
+END;/
 
 
 create or replace trigger "CompoundUpdateTrigger_college"
@@ -1011,9 +1001,7 @@ for update on "College" compound trigger
   begin
      NULL;
   end after statement;
-
-END;
-/
+END;/
 
 
 create trigger "tib_college" before insert
@@ -1060,9 +1048,7 @@ for delete on "Course" compound trigger
   begin
      NULL;
   end after statement;
-
-END;
-/
+END;/
 
 
 create or replace trigger "CompoundInsertTrigger_course"
@@ -1088,9 +1074,7 @@ for insert on "Course" compound trigger
   begin
      NULL;
   end after statement;
-
-END;
-/
+END;/
 
 
 create or replace trigger "CompoundUpdateTrigger_course"
@@ -1116,9 +1100,7 @@ for update on "Course" compound trigger
   begin
      NULL;
   end after statement;
-
-END;
-/
+END;/
 
 
 create trigger "tib_course" before insert
@@ -1165,9 +1147,7 @@ for delete on "CourseProgram" compound trigger
   begin
      NULL;
   end after statement;
-
-END;
-/
+END;/
 
 
 create or replace trigger "CompoundInsertTrigger_coursepr"
@@ -1193,9 +1173,7 @@ for insert on "CourseProgram" compound trigger
   begin
      NULL;
   end after statement;
-
-END;
-/
+END;/
 
 
 create or replace trigger "CompoundUpdateTrigger_coursepr"
@@ -1221,9 +1199,7 @@ for update on "CourseProgram" compound trigger
   begin
      NULL;
   end after statement;
-
-END;
-/
+END;/
 
 
 create trigger "tib_courseprogram" before insert
@@ -1270,9 +1246,7 @@ for delete on "Human" compound trigger
   begin
      NULL;
   end after statement;
-
-END;
-/
+END;/
 
 
 create or replace trigger "CompoundInsertTrigger_human"
@@ -1298,9 +1272,7 @@ for insert on "Human" compound trigger
   begin
      NULL;
   end after statement;
-
-END;
-/
+END;/
 
 
 create or replace trigger "CompoundUpdateTrigger_human"
@@ -1326,9 +1298,7 @@ for update on "Human" compound trigger
   begin
      NULL;
   end after statement;
-
-END;
-/
+END;/
 
 
 create trigger "tib_human" before insert
@@ -1375,9 +1345,7 @@ for delete on "Semester" compound trigger
   begin
      NULL;
   end after statement;
-
-END;
-/
+END;/
 
 
 create or replace trigger "CompoundInsertTrigger_semester"
@@ -1403,9 +1371,7 @@ for insert on "Semester" compound trigger
   begin
      NULL;
   end after statement;
-
-END;
-/
+END;/
 
 
 create or replace trigger "CompoundUpdateTrigger_semester"
@@ -1431,9 +1397,7 @@ for update on "Semester" compound trigger
   begin
      NULL;
   end after statement;
-
-END;
-/
+END;/
 
 
 create trigger "tib_semester" before insert
@@ -1480,9 +1444,7 @@ for delete on "Specialty" compound trigger
   begin
      NULL;
   end after statement;
-
-END;
-/
+END;/
 
 
 create or replace trigger "CompoundInsertTrigger_specialt"
@@ -1508,9 +1470,7 @@ for insert on "Specialty" compound trigger
   begin
      NULL;
   end after statement;
-
-END;
-/
+END;/
 
 
 create or replace trigger "CompoundUpdateTrigger_specialt"
@@ -1536,9 +1496,7 @@ for update on "Specialty" compound trigger
   begin
      NULL;
   end after statement;
-
-END;
-/
+END;/
 
 
 create trigger "tib_specialty" before insert
