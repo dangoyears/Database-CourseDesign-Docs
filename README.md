@@ -161,7 +161,7 @@
   - age `String`
   - idCard `String`
   - password `String`
-  - status `String`
+  - position `String`
 
 调用例子
 
@@ -179,12 +179,59 @@
         "age": "xx",
         "idCard": "440582199708310612",
         "password": "310612",
-        "status": "教务办主任"
+        "position": "教务办主任"
     }
     ```
 
 - **备注**：先查询数据库中是否已经存在该教师信息（根据工号查询），若没有则创建，已经存在的话则进行信息修改。
 - **说明**：若是创建教师个人信息的话，还需要将 `jobId` 和 `password` 加入到教师登陆验证表单中。
+
+### 课程信息登入
+
+- 权限 `admin`、`teacher`
+- 路径 `/write/course`
+- 参数
+  - name `String`,
+  - credit `String`',
+  - nature `String`',
+  - accommodate `String`',
+  - weekStart `String`',
+  - weekEnd `String`',
+  - sectionStart `String`',
+  - sectionEnd `String`',
+  - teachers `Array`',
+  - courseLeader `String`,
+  - address `String`'
+  - class `Array`',
+
+调用例子
+
+- 发送参数
+
+    ```json
+    {
+        "name": "数据结构",
+        "credit": "2",
+        "nature": "专业必修课",
+        "accommodate": "50",
+        "weekStart": "1",
+        "weekEnd": "16",
+        "sectionStart": "1",
+        "sectionEnd": "2",
+        "teachers": "['xxx', 'yyy']",
+        "courseLeader": "yyy",
+        "address": "理科南教学楼710",
+        "class": "['计算机科学与网络学院-软件工程-171']"
+    }
+    ```
+
+- **说明**：
+  - 若任课教师 teachers 只有一名，则课程组长 courseLeader 为空。
+  - 若班级 class 为空数组，说明该课程没有指定某一个班级需要上课。
+  
+- **备注**：
+    - 还需将该课程数据登入到每一个任课教师的信息中。具体信息见[教师个人信息的获取](#教师信息获取)。
+    - 若 class 不为空，还需将该课程数据登入到班级里每一个学生的信息中。具体信息见[学生个人信息的获取](#学生信息获取)。
 
 ## 信息获取
 
@@ -246,6 +293,7 @@
   - age `String`
   - idCard `String`
   - yearSystem `String`
+  - schedule `Array`
 
 调用例子
 
@@ -266,7 +314,25 @@
                 "birthday": "xxxx-xx-xx",
                 "age": "21",
                 "idCard": "440582199708310612",
-                "yearSystem": "4"
+                "yearSystem": "4",
+                "schedule": [
+                    {
+                        "name": "数据结构",
+                        "credit": "2",
+                        "nature": "专业必修课",
+                        "accommodate": "50",
+                        "weekStart": "1",
+                        "weekEnd": "16",
+                        "sectionStart": "1",
+                        "sectionEnd": "2",
+                        "teachers": "['xxx', 'yyy']",
+                        "courseLeader": "yyy",
+                        "address": "理科南教学楼710",
+                        "class": "['计算机科学与网络学院-软件工程-171']",
+                        "score": "90"
+                    }
+                    ...
+                ]
             }
             {
                 "college": "人文学院",
@@ -280,7 +346,8 @@
                 "birthday": "xxxx-xx-xx",
                 "age": "21",
                 "idCard": "440582199708310612",
-                "yearSystem": "5"
+                "yearSystem": "5",
+                "schedule": []
             }
         ]
     }
@@ -299,7 +366,8 @@
   - birthday `String`
   - age `String`
   - idCard `String`
-  - status `String`
+  - position `String`
+  - schedule `String`
 
 调用例子
 
@@ -318,7 +386,24 @@
                 "birthday": "xxxx-xx-xx",
                 "age": "xx",
                 "idCard": "440582199708310612",
-                "status": "教务办主任"  
+                "position": "教务办主任",
+                 "schedule": [
+                    {
+                        "name": "数据结构",
+                        "credit": "2",
+                        "nature": "专业必修课",
+                        "accommodate": "50",
+                        "weekStart": "1",
+                        "weekEnd": "16",
+                        "sectionStart": "1",
+                        "sectionEnd": "2",
+                        "teachers": "['xxx', 'yyy']",
+                        "courseLeader": "yyy",
+                        "address": "理科南教学楼710",
+                        "class": "['计算机科学与网络学院-软件工程-171']",
+                    }
+                    ...
+                ]
             }
             {
                 "college": "人文学院",
@@ -330,7 +415,100 @@
                 "birthday": "xxxx-xx-xx",
                 "age": "xx",
                 "idCard": "440582199708310612",
-                "status": "普通教师"
+                "position": "普通教师",
+                "schedule": []
+            }
+        ]
+    }
+    ```
+
+### 课程信息获取
+
+- 路径 `/read/course`
+- 返回数据
+  - name `String`,
+  - credit `String`',
+  - nature `String`',
+  - accommodate `String`',
+  - weekStart `String`',
+  - weekEnd `String`',
+  - sectionStart `String`',
+  - sectionEnd `String`',
+  - teachers `Array`',
+  - courseLeader `String`,
+  - address `String`'
+  - class `Array`',
+
+调用例子
+
+- 响应数据
+
+    ```json
+        {
+            "name": "数据结构",
+            "credit": "2",
+            "nature": "专业必修课",
+            "accommodate": "50",
+            "weekStart": "1",
+            "weekEnd": "16",
+            "sectionStart": "1",
+            "sectionEnd": "2",
+            "teachers": "['xxx', 'yyy']",
+            "courseLeader": "yyy",
+            "address": "理科南教学楼710",
+            "class": "['计算机科学与网络学院-软件工程-171']"
+        }
+        ...
+    ```
+
+调用例子
+
+- 响应
+
+    ```json
+    {
+        "data": [
+            {
+                "college": "计算机科学与网络工程学院",
+                "name": "xxx",
+                "jobId": "0000000001",
+                "sex": "男",
+                "education": "硕士",
+                "graduation": "南开大学",
+                "birthday": "xxxx-xx-xx",
+                "age": "xx",
+                "idCard": "440582199708310612",
+                "position": "教务办主任",
+                 "schedule": [
+                    {
+                        "name": "数据结构",
+                        "credit": "2",
+                        "nature": "专业必修课",
+                        "accommodate": "50",
+                        "weekStart": "1",
+                        "weekEnd": "16",
+                        "sectionStart": "1",
+                        "sectionEnd": "2",
+                        "teachers": "['xxx', 'yyy']",
+                        "courseLeader": "yyy",
+                        "address": "理科南教学楼710",
+                        "class": "['计算机科学与网络学院-软件工程-171']",
+                    }
+                    ...
+                ]
+            }
+            {
+                "college": "人文学院",
+                "name": "xxx",
+                "jobId": "0000000002",
+                "sex": "女",
+                "education": "博士后",
+                "graduation": "北京大学",
+                "birthday": "xxxx-xx-xx",
+                "age": "xx",
+                "idCard": "440582199708310612",
+                "position": "普通教师",
+                "schedule": []
             }
         ]
     }
@@ -353,7 +531,8 @@
         }
     ```
 
-- 说明：需要综合学院、专业、年级、班级等信息删除数据。
+- **说明**：需要综合学院、专业、年级、班级等信息删除数据。
+- **备注**：需要级联删去该班级中的所有学生信息。
 
 ### 学生/教师信息删除
 
