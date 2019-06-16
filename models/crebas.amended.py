@@ -16,7 +16,7 @@ def main():
 		sql = re.sub('//', '--', sql)
 		
 		# 将所有**大写的**`END`替换为`END;`。
-		sql = re.sub('\sEND\s', 'END;', sql)
+		sql = re.sub('\sEND\s', 'END;\n', sql)
 		
 		# 将所有的`IDSequence.NEXTVAL`替换为`"IDSequence".NEXTVAL`。
 		sql = re.sub('IDSequence.NEXTVAL', '"IDSequence".NEXTVAL', sql)
