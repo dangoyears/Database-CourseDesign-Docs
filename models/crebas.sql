@@ -409,10 +409,10 @@ create table "Course"
 /
 
 comment on column "Course"."CourseProperty" is
-'1: ×¨Òµ±ØĞŞ
-2: ×¨ÒµÑ¡ĞŞ
-3: Í¨Ê¶ĞÔÑ¡ĞŞ
-4: ÌåÓıÑ¡ĞŞ'
+'1: ä¸“ä¸šå¿…ä¿®
+2: ä¸“ä¸šé€‰ä¿®
+3: é€šè¯†æ€§é€‰ä¿®
+4: ä½“è‚²é€‰ä¿®'
 /
 
 /*==============================================================*/
@@ -470,7 +470,7 @@ create table "Human"
    "HumanID"            INTEGER              not null,
    "Name"               NVARCHAR2(32),
    "Sex"                NCHAR(1)            
-      constraint CKC_SEX_HUMAN check ("Sex" is null or ("Sex" in ('ÄĞ','Å®'))),
+      constraint CKC_SEX_HUMAN check ("Sex" is null or ("Sex" in ('ç”·','å¥³'))),
    "Birthday"           DATE,
    "Identity"           CHAR(18)             not null,
    "Notes"              CLOB,
@@ -501,8 +501,8 @@ create table "Semester"
 /
 
 comment on column "Semester"."SmesterCode" is
-'1: ´º¼¾Ñ§ÆÚ
-2: Çï¼¾Ñ§ÆÚ'
+'1: æ˜¥å­£å­¦æœŸ
+2: ç§‹å­£å­¦æœŸ'
 /
 
 /*==============================================================*/
@@ -544,17 +544,17 @@ create table "Student"
    "AdmissionDate"      DATE,
    "GraduationDate"     DATE,
    "StudentDegree"      NVARCHAR2(8)        
-      constraint CKC_STUDENTDEGREE_STUDENT check ("StudentDegree" is null or ("StudentDegree" in ('Ñ§Ê¿','Ë¶Ê¿','²©Ê¿'))),
+      constraint CKC_STUDENTDEGREE_STUDENT check ("StudentDegree" is null or ("StudentDegree" in ('å­¦å£«','ç¡•å£«','åšå£«'))),
    "YearOfSchool"       INTEGER              default 4,
    "Status"             NVARCHAR2(8)        
-      constraint CKC_STATUS_STUDENT check ("Status" is null or ("Status" in ('ÔÚ¶Á','±ÏÒµ'))),
+      constraint CKC_STATUS_STUDENT check ("Status" is null or ("Status" in ('åœ¨è¯»','æ¯•ä¸š'))),
    constraint PK_STUDENT primary key ("HumanID"),
    constraint AK_STUDENTNUMBER_STUDENT unique ("StudentNumber")
 )
 /
 
 comment on column "Student"."GraduationDate" is
-'¸ù¾İÑ§ÖÆ¿ÉÉèÖÃ³É±ÏÒµÄêµÄ9ÔÂ·İ¡£'
+'æ ¹æ®å­¦åˆ¶å¯è®¾ç½®æˆæ¯•ä¸šå¹´çš„9æœˆä»½ã€‚'
 /
 
 /*==============================================================*/
@@ -603,9 +603,9 @@ create table "Teacher"
    "TeacherNumber"      INTEGER              not null,
    "GraduationSchool"   NVARCHAR2(32),
    "Position"           NVARCHAR2(8)        
-      constraint CKC_POSITION_TEACHER check ("Position" is null or ("Position" in ('½ÌÎñ°ìÖ÷ÈÎ','ÆÕÍ¨½ÌÊ¦'))),
+      constraint CKC_POSITION_TEACHER check ("Position" is null or ("Position" in ('æ•™åŠ¡åŠä¸»ä»»','æ™®é€šæ•™å¸ˆ'))),
    "TeacherDegree"      NVARCHAR2(8)        
-      constraint CKC_TEACHERDEGREE_TEACHER check ("TeacherDegree" is null or ("TeacherDegree" in ('±¾¿Æ','Ë¶Ê¿','²©Ê¿','²©Ê¿ºó'))),
+      constraint CKC_TEACHERDEGREE_TEACHER check ("TeacherDegree" is null or ("TeacherDegree" in ('æœ¬ç§‘','ç¡•å£«','åšå£«','åšå£«å'))),
    constraint PK_TEACHER primary key ("HumanID"),
    constraint AK_TEACHERNUMBER_TEACHER unique ("TeacherNumber")
 )
