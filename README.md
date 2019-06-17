@@ -9,10 +9,14 @@
   - [学院信息登入](#学院信息登入)
   - [教师信息登入](#教师信息登入)
   - [学生信息登入](#学生信息登入)
+  - [课程信息登入](#课程信息登入)
 - [信息获取](#信息获取)
   - [学院信息获取](#学院信息获取)
   - [教师信息获取](#教师信息获取)
   - [学生信息获取](#学生信息获取)
+  - [课程信息获取](#课程信息获取)
+  - [学生个人信息获取](#学生个人信息获取)
+  - [教师个人信息获取](#教师个人信息获取)
 - [信息删除](#信息删除)
   - [班级信息删除](#班级信息删除)
   - [学生/教师信息删除](#学生教师信息删除)
@@ -87,7 +91,7 @@
   - specialty `String`
   - grade `String`
   - class `String`
-- 注意：需要对数据是否重复进行判断
+- **注意**：需要对数据是否重复进行判断
 
 调用例子
 
@@ -195,10 +199,7 @@
   - credit `String`',
   - nature `String`',
   - accommodate `String`',
-  - weekStart `String`',
-  - weekEnd `String`',
-  - sectionStart `String`',
-  - sectionEnd `String`',
+  - time `String`',
   - teachers `Array`',
   - courseLeader `String`,
   - address `String`'
@@ -214,10 +215,7 @@
         "credit": "2",
         "nature": "专业必修课",
         "accommodate": "50",
-        "weekStart": "1",
-        "weekEnd": "16",
-        "sectionStart": "1",
-        "sectionEnd": "2",
+        "time": "第7-14周,第4-6节",
         "teachers": "['xxx', 'yyy']",
         "courseLeader": "yyy",
         "address": "理科南教学楼710",
@@ -230,8 +228,8 @@
   - 若班级 class 为空数组，说明该课程没有指定某一个班级需要上课。
   
 - **备注**：
-    - 还需将该课程数据登入到每一个任课教师的信息中。具体信息见[教师个人信息的获取](#教师信息获取)。
-    - 若 class 不为空，还需将该课程数据登入到班级里每一个学生的信息中。具体信息见[学生个人信息的获取](#学生信息获取)。
+  - 还需将该课程数据登入到每一个任课教师的信息中。具体信息见[教师个人信息的获取](#教师信息获取)。
+  - 若 class 不为空，还需将该课程数据登入到班级里每一个学生的信息中。具体信息见[学生个人信息的获取](#学生信息获取)。
 
 ## 信息获取
 
@@ -430,10 +428,7 @@
   - credit `String`',
   - nature `String`',
   - accommodate `String`',
-  - weekStart `String`',
-  - weekEnd `String`',
-  - sectionStart `String`',
-  - sectionEnd `String`',
+  - time `String`,
   - teachers `Array`',
   - courseLeader `String`,
   - address `String`'
@@ -449,10 +444,7 @@
             "credit": "2",
             "nature": "专业必修课",
             "accommodate": "50",
-            "weekStart": "1",
-            "weekEnd": "16",
-            "sectionStart": "1",
-            "sectionEnd": "2",
+            "time": "第7-14周,第4-6节",
             "teachers": "['xxx', 'yyy']",
             "courseLeader": "yyy",
             "address": "理科南教学楼710",
@@ -485,10 +477,7 @@
                         "credit": "2",
                         "nature": "专业必修课",
                         "accommodate": "50",
-                        "weekStart": "1",
-                        "weekEnd": "16",
-                        "sectionStart": "1",
-                        "sectionEnd": "2",
+                        "time": "第7-14周,第4-6节",
                         "teachers": "['xxx', 'yyy']",
                         "courseLeader": "yyy",
                         "address": "理科南教学楼710",
@@ -511,6 +500,119 @@
                 "schedule": []
             }
         ]
+    }
+    ```
+
+### 学生个人信息获取
+
+- 路径 `/read/student/one`
+- 请求参数 `studentId`
+- 返回数据
+  - college `String`
+  - specialty `String`
+  - grade `String`
+  - class `String`
+  - name `String`
+  - studentId `String`
+  - status `String`
+  - sex `String`
+  - birthday `String`
+  - age `String`
+  - idCard `String`
+  - yearSystem `String`
+  - schedule `Array`
+
+调用例子
+
+- 参数
+    `https://dbcd.qfstudio.net/read/student/one?studentId=studentId`
+- 响应
+
+    ```json
+    {
+        "data": {
+            "college": "计算机科学与网络工程学院",
+            "specialty": "软件工程",
+            "grade": "17",
+            "class": "1",
+            "name": "xxx",
+            "studentId": "1706300032",
+            "status": "在读本科",
+            "sex": "男",
+            "birthday": "xxxx-xx-xx",
+            "age": "21",
+            "idCard": "440582199708310612",
+            "yearSystem": "4",
+            "schedule": [
+                {
+                    "name": "数据结构",
+                    "credit": "2",
+                    "nature": "专业必修课",
+                    "accommodate": "50",
+                    "time": "第7-14周,第4-6节",
+                    "teachers": "['xxx', 'yyy']",
+                    "courseLeader": "yyy",
+                    "address": "理科南教学楼710",
+                    "class": "['计算机科学与网络学院-软件工程-171']",
+                    "score": "90"
+                }
+                ...
+            ]
+        }
+    }
+    ```
+
+### 教师个人信息获取
+
+- 路径 `/read/teacher/one`
+- 请求参数 `jobId`
+- 返回数据
+  - college `String`
+  - name `String`
+  - jobId `String`
+  - sex `String`
+  - education `String`
+  - graduation `String`
+  - birthday `String`
+  - age `String`
+  - idCard `String`
+  - position `String`
+  - schedule `String`
+
+调用例子
+
+- 参数
+    `https://dbcd.qfstudio.net/read/teacher/one?jobId=jobId`
+- 响应
+
+    ```json
+    {
+        "data": {
+            "college": "计算机科学与网络工程学院",
+            "name": "xxx",
+            "jobId": "0000000001",
+            "sex": "男",
+            "education": "硕士",
+            "graduation": "南开大学",
+            "birthday": "xxxx-xx-xx",
+            "age": "xx",
+            "idCard": "440582199708310612",
+            "position": "教务办主任",
+                "schedule": [
+                    {
+                        "name": "数据结构",
+                        "credit": "2",
+                        "nature": "专业必修课",
+                        "accommodate": "50",
+                        "time": "第7-14周,第4-6节",
+                        "teachers": "['xxx', 'yyy']",
+                        "courseLeader": "yyy",
+                        "address": "理科南教学楼710",
+                        "class": "['计算机科学与网络学院-软件工程-171']",
+                    }
+                    ...
+            ]
+        }
     }
     ```
 
