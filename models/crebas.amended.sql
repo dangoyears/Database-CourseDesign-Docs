@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 11g                           */
-/* Created on:     2019/6/16 0:12:35                            */
+/* Created on:     2019/6/16 10:05:02                           */
 /*==============================================================*/
 
 
@@ -410,10 +410,10 @@ create table "Course"
 /
 
 comment on column "Course"."CourseProperty" is
-'1: ä¸“ä¸šå¿…ä¿®
-2: ä¸“ä¸šé€‰ä¿®
-3: é€šè¯†æ€§é€‰ä¿®
-4: ä½“è‚²é€‰ä¿®'
+'1: ×¨Òµ±ØĞŞ
+2: ×¨ÒµÑ¡ĞŞ
+3: Í¨Ê¶ĞÔÑ¡ĞŞ
+4: ÌåÓıÑ¡ĞŞ'
 /
 
 /*==============================================================*/
@@ -471,7 +471,7 @@ create table "Human"
    "HumanID"            INTEGER              not null,
    "Name"               NVARCHAR2(32),
    "Sex"                NCHAR(1)            
-      constraint CKC_SEX_HUMAN check ("Sex" is null or ("Sex" in ('ç”·','å¥³'))),
+      constraint CKC_SEX_HUMAN check ("Sex" is null or ("Sex" in ('ÄĞ','Å®'))),
    "Birthday"           DATE,
    "Identity"           CHAR(18)             not null,
    "Notes"              CLOB,
@@ -502,8 +502,8 @@ create table "Semester"
 /
 
 comment on column "Semester"."SmesterCode" is
-'1: æ˜¥å­£å­¦æœŸ
-2: ç§‹å­£å­¦æœŸ'
+'1: ´º¼¾Ñ§ÆÚ
+2: Çï¼¾Ñ§ÆÚ'
 /
 
 /*==============================================================*/
@@ -545,17 +545,17 @@ create table "Student"
    "AdmissionDate"      DATE,
    "GraduationDate"     DATE,
    "StudentDegree"      NVARCHAR2(8)        
-      constraint CKC_STUDENTDEGREE_STUDENT check ("StudentDegree" is null or ("StudentDegree" in ('å­¦å£«','ç¡•å£«','åšå£«'))),
+      constraint CKC_STUDENTDEGREE_STUDENT check ("StudentDegree" is null or ("StudentDegree" in ('Ñ§Ê¿','Ë¶Ê¿','²©Ê¿'))),
    "YearOfSchool"       INTEGER              default 4,
    "Status"             NVARCHAR2(8)        
-      constraint CKC_STATUS_STUDENT check ("Status" is null or ("Status" in ('åœ¨è¯»','æ¯•ä¸š'))),
+      constraint CKC_STATUS_STUDENT check ("Status" is null or ("Status" in ('ÔÚ¶Á','±ÏÒµ'))),
    constraint PK_STUDENT primary key ("HumanID"),
    constraint AK_STUDENTNUMBER_STUDENT unique ("StudentNumber")
 )
 /
 
 comment on column "Student"."GraduationDate" is
-'æ ¹æ®å­¦åˆ¶å¯è®¾ç½®æˆæ¯•ä¸šå¹´çš„9æœˆä»½ã€‚'
+'¸ù¾İÑ§ÖÆ¿ÉÉèÖÃ³É±ÏÒµÄêµÄ9ÔÂ·İ¡£'
 /
 
 /*==============================================================*/
@@ -604,9 +604,9 @@ create table "Teacher"
    "TeacherNumber"      INTEGER              not null,
    "GraduationSchool"   NVARCHAR2(32),
    "Position"           NVARCHAR2(8)        
-      constraint CKC_POSITION_TEACHER check ("Position" is null or ("Position" in ('æ•™åŠ¡åŠä¸»ä»»','æ™®é€šæ•™å¸ˆ'))),
+      constraint CKC_POSITION_TEACHER check ("Position" is null or ("Position" in ('½ÌÎñ°ìÖ÷ÈÎ','ÆÕÍ¨½ÌÊ¦'))),
    "TeacherDegree"      NVARCHAR2(8)        
-      constraint CKC_TEACHERDEGREE_TEACHER check ("TeacherDegree" is null or ("TeacherDegree" in ('æœ¬ç§‘','ç¡•å£«','åšå£«','åšå£«å'))),
+      constraint CKC_TEACHERDEGREE_TEACHER check ("TeacherDegree" is null or ("TeacherDegree" in ('Ñ§Ê¿','Ë¶Ê¿','²©Ê¿','²©Ê¿ºó'))),
    constraint PK_TEACHER primary key ("HumanID"),
    constraint AK_TEACHERNUMBER_TEACHER unique ("TeacherNumber")
 )
@@ -751,7 +751,8 @@ for delete on "Class" compound trigger
   begin
      NULL;
   end after statement;
-END;/
+END;
+/
 
 
 create or replace trigger "CompoundInsertTrigger_class"
@@ -777,7 +778,8 @@ for insert on "Class" compound trigger
   begin
      NULL;
   end after statement;
-END;/
+END;
+/
 
 
 create or replace trigger "CompoundUpdateTrigger_class"
@@ -803,7 +805,8 @@ for update on "Class" compound trigger
   begin
      NULL;
   end after statement;
-END;/
+END;
+/
 
 
 create trigger "tib_class" before insert
@@ -850,7 +853,8 @@ for delete on "Classroom" compound trigger
   begin
      NULL;
   end after statement;
-END;/
+END;
+/
 
 
 create or replace trigger "CompoundInsertTrigger_classroo"
@@ -876,7 +880,8 @@ for insert on "Classroom" compound trigger
   begin
      NULL;
   end after statement;
-END;/
+END;
+/
 
 
 create or replace trigger "CompoundUpdateTrigger_classroo"
@@ -902,7 +907,8 @@ for update on "Classroom" compound trigger
   begin
      NULL;
   end after statement;
-END;/
+END;
+/
 
 
 create trigger "tib_classroom" before insert
@@ -949,7 +955,8 @@ for delete on "College" compound trigger
   begin
      NULL;
   end after statement;
-END;/
+END;
+/
 
 
 create or replace trigger "CompoundInsertTrigger_college"
@@ -975,7 +982,8 @@ for insert on "College" compound trigger
   begin
      NULL;
   end after statement;
-END;/
+END;
+/
 
 
 create or replace trigger "CompoundUpdateTrigger_college"
@@ -1001,7 +1009,8 @@ for update on "College" compound trigger
   begin
      NULL;
   end after statement;
-END;/
+END;
+/
 
 
 create trigger "tib_college" before insert
@@ -1048,7 +1057,8 @@ for delete on "Course" compound trigger
   begin
      NULL;
   end after statement;
-END;/
+END;
+/
 
 
 create or replace trigger "CompoundInsertTrigger_course"
@@ -1074,7 +1084,8 @@ for insert on "Course" compound trigger
   begin
      NULL;
   end after statement;
-END;/
+END;
+/
 
 
 create or replace trigger "CompoundUpdateTrigger_course"
@@ -1100,7 +1111,8 @@ for update on "Course" compound trigger
   begin
      NULL;
   end after statement;
-END;/
+END;
+/
 
 
 create trigger "tib_course" before insert
@@ -1147,7 +1159,8 @@ for delete on "CourseProgram" compound trigger
   begin
      NULL;
   end after statement;
-END;/
+END;
+/
 
 
 create or replace trigger "CompoundInsertTrigger_coursepr"
@@ -1173,7 +1186,8 @@ for insert on "CourseProgram" compound trigger
   begin
      NULL;
   end after statement;
-END;/
+END;
+/
 
 
 create or replace trigger "CompoundUpdateTrigger_coursepr"
@@ -1199,7 +1213,8 @@ for update on "CourseProgram" compound trigger
   begin
      NULL;
   end after statement;
-END;/
+END;
+/
 
 
 create trigger "tib_courseprogram" before insert
@@ -1246,7 +1261,8 @@ for delete on "Human" compound trigger
   begin
      NULL;
   end after statement;
-END;/
+END;
+/
 
 
 create or replace trigger "CompoundInsertTrigger_human"
@@ -1272,7 +1288,8 @@ for insert on "Human" compound trigger
   begin
      NULL;
   end after statement;
-END;/
+END;
+/
 
 
 create or replace trigger "CompoundUpdateTrigger_human"
@@ -1298,7 +1315,8 @@ for update on "Human" compound trigger
   begin
      NULL;
   end after statement;
-END;/
+END;
+/
 
 
 create trigger "tib_human" before insert
@@ -1345,7 +1363,8 @@ for delete on "Semester" compound trigger
   begin
      NULL;
   end after statement;
-END;/
+END;
+/
 
 
 create or replace trigger "CompoundInsertTrigger_semester"
@@ -1371,7 +1390,8 @@ for insert on "Semester" compound trigger
   begin
      NULL;
   end after statement;
-END;/
+END;
+/
 
 
 create or replace trigger "CompoundUpdateTrigger_semester"
@@ -1397,7 +1417,8 @@ for update on "Semester" compound trigger
   begin
      NULL;
   end after statement;
-END;/
+END;
+/
 
 
 create trigger "tib_semester" before insert
@@ -1444,7 +1465,8 @@ for delete on "Specialty" compound trigger
   begin
      NULL;
   end after statement;
-END;/
+END;
+/
 
 
 create or replace trigger "CompoundInsertTrigger_specialt"
@@ -1470,7 +1492,8 @@ for insert on "Specialty" compound trigger
   begin
      NULL;
   end after statement;
-END;/
+END;
+/
 
 
 create or replace trigger "CompoundUpdateTrigger_specialt"
@@ -1496,7 +1519,8 @@ for update on "Specialty" compound trigger
   begin
      NULL;
   end after statement;
-END;/
+END;
+/
 
 
 create trigger "tib_specialty" before insert
