@@ -9,7 +9,7 @@
 
 ## Power Designer在根据物理模型生成数据库时，可能出现的bug
 
-PowerDesinger版本：16.5.5.0（试用）；DBMS：Oracle 11g
+PowerDesinger版本：16.5.5.0-试用版；DBMS：Oracle 11g
 
 - 在生成触发器代码时，使用的双斜杠注释而不是使用双横杠注释；如`// DECLARATION`，实际应为`-- DECLARATION`。
 - 在引用序列时，不自动对序列对象添加双引号，导致非全大写的序列不能被正确引用。如`IDSequence.NEXTVAL`实际应为`"IDSequence".NEXTVAL`。
