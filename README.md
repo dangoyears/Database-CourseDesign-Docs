@@ -196,6 +196,7 @@
 - 路径 `/write/course`
 - 参数
   - name `String`,
+  - id `String`,
   - credit `String`',
   - nature `String`',
   - accommodate `String`',
@@ -213,6 +214,7 @@
     ```json
     {
         "name": "数据结构",
+        "id": "0000000001",
         "credit": "2",
         "nature": "专业必修课",
         "accommodate": "50",
@@ -230,6 +232,7 @@
   - 若班级 class 为空数组，说明该课程没有指定某一个班级需要上课。
   
 - **备注**：
+  - 若数据库中该课程编号已经存在，则修改课程信息。否则为创建课程信息。
   - 还需将该课程数据登入到每一个任课教师的信息中。具体信息见[教师个人信息的获取](#教师信息获取)。
   - 若 class 不为空，还需将该课程数据登入到班级里每一个学生的信息中。具体信息见[学生个人信息的获取](#学生信息获取)。
 
@@ -318,6 +321,7 @@
                 "schedule": [
                     {
                         "name": "数据结构",
+                        "id": "0000000001",
                         "credit": "2",
                         "nature": "专业必修课",
                         "accommodate": "50",
@@ -388,6 +392,7 @@
                  "schedule": [
                     {
                         "name": "数据结构",
+                        "id": "0000000001",
                         "credit": "2",
                         "nature": "专业必修课",
                         "accommodate": "50",
@@ -423,6 +428,7 @@
 - 路径 `/read/course`
 - 返回数据
   - name `String`,
+  - id `String`
   - credit `String`',
   - nature `String`',
   - accommodate `String`',
@@ -440,6 +446,7 @@
     ```json
         {
             "name": "数据结构",
+            "id": "0000000001",
             "credit": "2",
             "nature": "专业必修课",
             "accommodate": "50",
@@ -474,6 +481,7 @@
                  "schedule": [
                     {
                         "name": "数据结构",
+                        "id": "0000000001",
                         "credit": "2",
                         "nature": "专业必修课",
                         "accommodate": "50",
@@ -547,6 +555,7 @@
             "schedule": [
                 {
                     "name": "数据结构",
+                    "id": "0000000001",
                     "credit": "2",
                     "nature": "专业必修课",
                     "accommodate": "50",
@@ -602,6 +611,7 @@
                 "schedule": [
                     {
                         "name": "数据结构",
+                        "id": "0000000001",
                         "credit": "2",
                         "nature": "专业必修课",
                         "accommodate": "50",
