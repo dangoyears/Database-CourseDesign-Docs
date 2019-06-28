@@ -440,72 +440,23 @@
 
 调用例子
 
-- 响应数据
-
-    ```json
-        {
-            "name": "数据结构",
-            "id": "0000000001",
-            "credit": "2",
-            "nature": "专业必修课",
-            "accommodate": "50",
-            "selectedSum": "50",
-            "time": "第7-14周,第4-6节",
-            "teachers": "['xxx', 'yyy']",
-            "courseLeader": "yyy",
-            "address": "理科南教学楼710",
-            "class": "['计算机科学与网络学院-软件工程-171']"
-        }
-        ...
-    ```
-
-调用例子
-
 - 响应
 
     ```json
     {
         "data": [
             {
-                "college": "计算机科学与网络工程学院",
-                "name": "xxx",
-                "jobId": "0000000001",
-                "sex": "男",
-                "education": "硕士",
-                "graduation": "南开大学",
-                "birthday": "xxxx-xx-xx",
-                "age": "xx",
-                "idCard": "440582199708310612",
-                "position": "教务办主任",
-                 "schedule": [
-                    {
-                        "name": "数据结构",
-                        "id": "0000000001",
-                        "credit": "2",
-                        "nature": "专业必修课",
-                        "accommodate": "50",
-                        "selectedSum": "50",
-                        "time": "第7-14周,第4-6节",
-                        "teachers": "['xxx', 'yyy']",
-                        "courseLeader": "yyy",
-                        "address": "理科南教学楼710",
-                        "class": "['计算机科学与网络学院-软件工程-171']",
-                    }
-                    ...
-                ]
-            }
-            {
-                "college": "人文学院",
-                "name": "xxx",
-                "jobId": "0000000002",
-                "sex": "女",
-                "education": "博士后",
-                "graduation": "北京大学",
-                "birthday": "xxxx-xx-xx",
-                "age": "xx",
-                "idCard": "440582199708310612",
-                "position": "普通教师",
-                "schedule": []
+                "name": "数据结构",
+                "id": "0000000001",
+                "credit": "2",
+                "nature": "专业必修课",
+                "accommodate": "50",
+                "selectedSum": "50",
+                "time": "第7-14周,第4-6节",
+                "teachers": "['xxx', 'yyy']",
+                "courseLeader": "yyy",
+                "address": "理科南教学楼710",
+                "class": "['计算机科学与网络学院-软件工程-171']",
             }
         ]
     }
