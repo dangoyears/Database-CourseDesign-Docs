@@ -19,6 +19,7 @@
 - [信息删除](#信息删除)
   - [班级信息删除](#班级信息删除)
   - [学生/教师信息删除](#学生教师信息删除)
+  - [课程信息删除](#课程信息删除)
 - [其他操作](#其他操作)
   - [欢迎路由](#欢迎路由)
 
@@ -196,15 +197,15 @@
 - 参数
   - name `String`,
   - id `String`,
-  - credit `String`',
-  - nature `String`',
-  - accommodate `String`',
+  - credit `String`,
+  - nature `String`,
+  - accommodate `String`,
   - selectedSum `String`,
-  - time `String`',
-  - teachers `Array`',
+  - time `String`,
+  - teachers `Array`,
   - courseLeader `String`,
-  - address `String`'
-  - class `Array`',
+  - address `String`
+  - class `Array`,
 
 调用例子
 
@@ -616,6 +617,18 @@
             "id": "xxxxxxxxxx"
         }
     ```
+
+### 课程信息删除
+
+- 路径 `/delete/class`
+- 参数
+  - id `String`
+- 说明：根据课程编号 id 来删除课程。
+- **备注**：还需要从学生 / 教师的个人课表信息 schedule 中删去相应的课程。
+
+调用例子
+
+`https://dbcd.qfstudio.net/delete/class?id=id`
 
 ## 其他操作
 
