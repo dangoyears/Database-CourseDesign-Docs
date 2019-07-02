@@ -439,6 +439,7 @@
   - courseLeader `String`,
   - address `String`'
   - class `Array`',
+- 权限授予：`admin`、`student`
 
 调用例子
 
