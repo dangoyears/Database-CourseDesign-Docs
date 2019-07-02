@@ -247,6 +247,7 @@
   - grade `String`
   - class `String`
   - sum `String`
+- 权限授予：`admin`、`teacher`
 
 调用例子
 
