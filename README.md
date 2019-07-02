@@ -242,14 +242,8 @@
 - 权限 `student`
 - 路径 `/register/course`
 - 参数
-  - classId `String`
-  - college `String`
-  - specialty `String`
-  - grade `String`
-  - class `String`
-  - name `String`
+  - courseId `String`
   - studentId `String`
-  - sex `String`
 - 说明：往课程编号为`classId`的课程中插入选修了该课程的学生信息。
 
 调用例子
@@ -259,13 +253,7 @@
     ```json
     {
         "classId": "0000000001",
-        "college": "计算机科学与网络学院",
-        "specialty": "软件工程",
-        "grade": "17",
-        "class": "1",
-        "name": "夏侯瑾轩",
         "studentId": "1706300000",
-        "sex": "男"
     }
     ```
 
