@@ -9,6 +9,7 @@
   - [教师信息登入](#教师信息登入)
   - [学生信息登入](#学生信息登入)
   - [课程信息登入](#课程信息登入)
+  - [学生自主选课](#学生自主选课)
 - [信息获取](#信息获取)
   - [学院信息获取](#学院信息获取)
   - [教师信息获取](#教师信息获取)
@@ -236,6 +237,38 @@
   - 还需将该课程数据登入到每一个任课教师的信息中。具体信息见[教师个人信息的获取](#教师信息获取)。
   - 若 class 不为空，还需将该课程数据登入到班级里每一个学生的信息中。具体信息见[学生个人信息的获取](#学生信息获取)。
 
+### 学生自主选课
+
+- 权限 `student`
+- 路径 `/register/course`
+- 参数
+  - classId `String`
+  - college `String`
+  - specialty `String`
+  - grade `String`
+  - class `String`
+  - name `String`
+  - studentId `String`
+  - sex `String`
+- 说明：往课程编号为`classId`的课程中插入选修了该课程的学生信息。
+
+调用例子
+
+- 发送参数
+
+    ```json
+    {
+        "classId": "0000000001",
+        "college": "计算机科学与网络学院",
+        "specialty": "软件工程",
+        "grade": "17",
+        "class": "1",
+        "name": "夏侯瑾轩",
+        "studentId": "1706300000",
+        "sex": "男"
+    }
+    ```
+
 ## 信息获取
 
 ### 学院信息获取
@@ -428,17 +461,19 @@
 
 - 路径 `/read/course`
 - 返回数据
-  - name `String`,
+  - name `String`
   - id `String`
-  - credit `String`',
-  - nature `String`',
-  - accommodate `String`',
-  - selectedSum `String`',
-  - time `String`,
-  - teachers `Array`',
-  - courseLeader `String`,
-  - address `String`'
-  - class `Array`',
+  - credit `String`
+  - nature `String`
+  - accommodate `String`
+  - selectedSum `String`
+  - time `String`
+  - teachers `Array`
+  - courseLeader `String`
+  - address `String`
+  - class `Array`
+  - students `Array`
+- 说明：`students`为选择该课程的学生，数组元素是`Object`，包含的属性有：学院、专业、班级、姓名、学号、性别。
 - 权限授予：`admin`、`student`
 
 调用例子
@@ -460,6 +495,7 @@
                 "courseLeader": "yyy",
                 "address": "理科南教学楼710",
                 "class": "['计算机科学与网络学院-软件工程-171']",
+                "students": "[{}, {}]"
             }
         ]
     }
