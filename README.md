@@ -646,7 +646,7 @@
 
 ### 课程信息删除
 
-- 路径 `/delete/class`
+- 路径 `/delete/course`
 - 参数
   - id `String`
 - 说明：根据课程编号 id 来删除课程。
@@ -654,7 +654,22 @@
 
 调用例子
 
-`https://dbcd.qfstudio.net/delete/class?id=id`
+`https://dbcd.qfstudio.net/delete/course?id=id`
+
+### 退选课程
+
+- 权限 `student`
+- 路径 `/cancel/course`
+- 参数
+  - studentId `String`
+  - courseId `String`
+- **备注**：
+  - 在`courseId`课程的`students`属性中删掉`studentId`学生。
+  - 在`studentId`学生的`schedule`属性中删掉`courseId`课程。
+
+调用例子
+
+`https://dbcd.qfstudio.net/cancel/course?courseId=courseId&studentId=studentId`
 
 ## 其他操作
 
